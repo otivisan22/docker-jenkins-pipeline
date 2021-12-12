@@ -1,7 +1,9 @@
-FROM ubuntu
-RUN apt-get update
-RUN apt-get install -y nginx
-COPY index-custom.html /var/www/html/index.html
-EXPOSE 80
-#CMD nginx -g 'daemon off;'
-ENTRYPOINT nginx -g 'daemon off;'
+FROM maven:3.5.2-jdk-8
+
+RUN mkdir -p /app
+
+COPY . /app
+
+WORKDIR /app
+
+CMD mvn spring-boot:run 
